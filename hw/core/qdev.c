@@ -38,6 +38,7 @@
 #include "hw/sysbus.h"
 #include "qapi-event.h"
 #include "migration/migration.h"
+#include "qemu/log.h"
 
 int qdev_hotplug = 0;
 static bool qdev_hot_added = false;
@@ -148,10 +149,12 @@ DeviceState *qdev_try_create(BusState *bus, const char *type)
     DeviceState *dev;
 
     if (object_class_by_name(type) == NULL) {
+        qemu_log_mask(LOG_AVATAR, "obj class by name is null\n");
         return NULL;
     }
     dev = DEVICE(object_new(type));
     if (!dev) {
+        qemu_log_mask(LOG_AVATAR, "device Object new is null\n");
         return NULL;
     }
 
