@@ -95,7 +95,7 @@ qemu_log_vprintf(const char *fmt, va_list va)
  */
 #define qemu_log_mask(MASK, FMT, ...)                   \
     do {                                                \
-        if (unlikely(qemu_loglevel_mask(MASK))) {       \
+        {       \
             qemu_log(FMT, ## __VA_ARGS__);              \
         }                                               \
     } while (0)
