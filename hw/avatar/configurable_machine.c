@@ -484,7 +484,6 @@ static THISCPU *create_cpu(MachineState * ms, QDict *conf)
     Object *cpuobj;
 
 #ifdef TARGET_AARCH64
-#error TEST
     if (!cpu_model) cpu_model = "cortex-a57";
 #else
     if (!cpu_model) cpu_model = "arm926";
