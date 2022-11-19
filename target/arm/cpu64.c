@@ -164,7 +164,7 @@ static void aarch64_a53_initfn(Object *obj)
     set_feature(&cpu->env, ARM_FEATURE_NEON);
     set_feature(&cpu->env, ARM_FEATURE_GENERIC_TIMER);
 
-    printf("WARNING! a53 initfn has AARCH64 disabled for testing purposes!")
+    printf("WARNING! a53 initfn has AARCH64 disabled for testing purposes!");
     //set_feature(&cpu->env, ARM_FEATURE_AARCH64);
     set_feature(&cpu->env, ARM_FEATURE_CBAR_RO);
     set_feature(&cpu->env, ARM_FEATURE_V8_AES);
