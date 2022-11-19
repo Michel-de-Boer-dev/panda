@@ -551,7 +551,7 @@ static THISCPU *create_cpu(MachineState * ms, QDict *conf)
 #if defined(TARGET_ARM)
 
 #ifdef TARGET_AARCH64
-    set_feature(&cpuu->env, ARM_FEATURE_AARCH64);
+    // set_feature(&cpuu->env, ARM_FEATURE_AARCH64);
     set_feature(&cpuu->env, ARM_FEATURE_CONFIGURABLE);
 #else
     avatar_add_banked_registers(cpuu);
