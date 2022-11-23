@@ -153,11 +153,11 @@ static void aarch64_a57_initfn(Object *obj)
     cpu->gic_vprebits = 5;
     define_arm_cp_regs(cpu, cortex_a57_a53_cp_reginfo);
 }
-
+static void aarch64_cpu_set_aarch64(Object *obj, bool value, Error **errp);
 static void aarch64_a53_initfn(Object *obj)
 {
     ARMCPU *cpu = ARM_CPU(obj);
-    aarch64_cpu_set_aarch64(cpu, true, NULL);//For testing purposes
+    aarch64_cpu_set_aarch64(cpu, false, NULL);//For testing purposes
 
     cpu->dtb_compatible = "arm,cortex-a53";
     set_feature(&cpu->env, ARM_FEATURE_V8);
