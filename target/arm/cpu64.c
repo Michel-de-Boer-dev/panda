@@ -157,6 +157,7 @@ static void aarch64_a57_initfn(Object *obj)
 static void aarch64_a53_initfn(Object *obj)
 {
     ARMCPU *cpu = ARM_CPU(obj);
+    aarch64_cpu_set_aarch64(cpu, true, NULL);//For testing purposes
 
     cpu->dtb_compatible = "arm,cortex-a53";
     set_feature(&cpu->env, ARM_FEATURE_V8);
@@ -164,8 +165,7 @@ static void aarch64_a53_initfn(Object *obj)
     set_feature(&cpu->env, ARM_FEATURE_NEON);
     set_feature(&cpu->env, ARM_FEATURE_GENERIC_TIMER);
 
-    printf("WARNING! a53 initfn has AARCH64 disabled for testing purposes!");
-    //set_feature(&cpu->env, ARM_FEATURE_AARCH64);
+    set_feature(&cpu->env, ARM_FEATURE_AARCH64);
     set_feature(&cpu->env, ARM_FEATURE_CBAR_RO);
     set_feature(&cpu->env, ARM_FEATURE_V8_AES);
     set_feature(&cpu->env, ARM_FEATURE_V8_SHA1);
@@ -218,6 +218,7 @@ static void aarch64_a53_initfn(Object *obj)
 static void aarch64_any_initfn(Object *obj)
 {
     ARMCPU *cpu = ARM_CPU(obj);
+    printf("WARNING! aarch64 init any fn called!");
 
     set_feature(&cpu->env, ARM_FEATURE_V8);
     set_feature(&cpu->env, ARM_FEATURE_VFP4);
@@ -257,6 +258,7 @@ static bool aarch64_cpu_get_aarch64(Object *obj, Error **errp)
 
 static void aarch64_cpu_set_aarch64(Object *obj, bool value, Error **errp)
 {
+    printf("Called aarch64_cpu_set_aarch64");
     ARMCPU *cpu = ARM_CPU(obj);
 
     /* At this time, this property is only allowed if KVM is enabled.  This
