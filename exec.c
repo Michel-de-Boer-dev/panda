@@ -2713,6 +2713,7 @@ static void tcg_commit(MemoryListener *listener)
      * may have split the RCU critical section.
      */
     d = atomic_rcu_read(&cpuas->as->dispatch);
+    printf("Setting memory dispatch in tcg_commit %p \n", d);
     atomic_rcu_set(&cpuas->memory_dispatch, d);
     tlb_flush(cpuas->cpu);
 }
