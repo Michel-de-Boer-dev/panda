@@ -153,7 +153,28 @@ static void aarch64_a57_initfn(Object *obj)
     cpu->gic_vprebits = 5;
     define_arm_cp_regs(cpu, cortex_a57_a53_cp_reginfo);
 }
-static void aarch64_cpu_set_aarch64(Object *obj, bool value, Error **errp);
+static void aarch64_cpu_set_aarch64(Object *obj, bool value, Error **errp)
+{
+    printf("Called aarch64_cpu_set_aarch64 %i",value);
+    ARMCPU *cpu = ARM_CPU(obj);
+
+    /* At this time, this property is only allowed if KVM is enabled.  This
+     * restriction allows us to avoid fixing up functionality that assumes a
+     * uniform execution state like do_interrupt.
+     */
+    if (!kvm_enabled()) {
+        error_setg(errp, "'aarch64' feature cannot be disabled "
+                         "unless KVM is enabled");
+        return;
+    }
+
+    if (value == false) {
+        unset_feature(&cpu->env, ARM_FEATURE_AARCH64);
+    } else {
+        set_feature(&cpu->env, ARM_FEATURE_AARCH64);
+    }
+}
+
 static void aarch64_a53_initfn(Object *obj)
 {
     ARMCPU *cpu = ARM_CPU(obj);
@@ -256,27 +277,7 @@ static bool aarch64_cpu_get_aarch64(Object *obj, Error **errp)
     return arm_feature(&cpu->env, ARM_FEATURE_AARCH64);
 }
 
-static void aarch64_cpu_set_aarch64(Object *obj, bool value, Error **errp)
-{
-    printf("Called aarch64_cpu_set_aarch64");
-    ARMCPU *cpu = ARM_CPU(obj);
 
-    /* At this time, this property is only allowed if KVM is enabled.  This
-     * restriction allows us to avoid fixing up functionality that assumes a
-     * uniform execution state like do_interrupt.
-     */
-    if (!kvm_enabled()) {
-        error_setg(errp, "'aarch64' feature cannot be disabled "
-                         "unless KVM is enabled");
-        return;
-    }
-
-    if (value == false) {
-        unset_feature(&cpu->env, ARM_FEATURE_AARCH64);
-    } else {
-        set_feature(&cpu->env, ARM_FEATURE_AARCH64);
-    }
-}
 
 static void aarch64_cpu_initfn(Object *obj)
 {
