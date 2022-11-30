@@ -407,21 +407,27 @@ static MemoryRegionSection *address_space_lookup_region(AddressSpaceDispatch *d,
     MemoryRegionSection *section = atomic_read(&d->mru_section);
     subpage_t *subpage;
     bool update;
-    printf("section: %p\n", section);
-    printf("section: %p\n", &d->map.sections[PHYS_SECTION_UNASSIGNED]);
+    printf("section inc: %p\n", section);
+    printf("map section: %p\n", &d->map.sections[PHYS_SECTION_UNASSIGNED]);
     if (section && section != &d->map.sections[PHYS_SECTION_UNASSIGNED] &&
         section_covers_addr(section, addr)) {
         update = false;
     } else {
         section = phys_page_find(d->phys_map, addr, d->map.nodes,
                                  d->map.sections);
+        printf("phys page find: %p\n", section);
+
         update = true;
     }
     if (resolve_subpage && section->mr->subpage) {
         subpage = container_of(section->mr, subpage_t, iomem);
         section = &d->map.sections[subpage->sub_section[SUBPAGE_IDX(addr)]];
+        printf("subpage: %p\n", section);
+
     }
     if (update) {
+        printf("updating MRU section: %p\n", section);
+
         atomic_set(&d->mru_section, section);
     }
     return section;
