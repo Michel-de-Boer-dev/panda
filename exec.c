@@ -407,7 +407,8 @@ static MemoryRegionSection *address_space_lookup_region(AddressSpaceDispatch *d,
     MemoryRegionSection *section = atomic_read(&d->mru_section);
     subpage_t *subpage;
     bool update;
-
+    printf("%p\n", section);
+    printf("%p\n", &d->map.sections[PHYS_SECTION_UNASSIGNED]);
     if (section && section != &d->map.sections[PHYS_SECTION_UNASSIGNED] &&
         section_covers_addr(section, addr)) {
         update = false;
