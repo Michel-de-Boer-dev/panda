@@ -498,7 +498,7 @@ IOMMUTLBEntry address_space_get_iotlb_entry(AddressSpace *as, hwaddr addr,
                 | (addr & iotlb.addr_mask));
         as = iotlb.target_as;
     }
-
+    printf("iotlb: %p\n", &iotlb);
     return iotlb;
 }
 
@@ -551,7 +551,7 @@ address_space_translate_for_iotlb(CPUState *cpu, int asidx, hwaddr addr,
 
     section = address_space_translate_internal(d, addr, xlat, plen, false);
 
-    assert(!section->mr->iommu_ops);
+    // assert(!section->mr->iommu_ops);
     return section;
 }
 #endif

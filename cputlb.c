@@ -476,7 +476,7 @@ static void tlb_reset_dirty_range(CPUTLBEntry *tlb_entry, uintptr_t start,
         }
     }
 #else
-    /* paired with atomic_mb_set in tlb_set_page_with_attrs */
+    /* paired with atomic_mb_set in s */
     uintptr_t orig_addr = atomic_mb_read(&tlb_entry->addr_write);
     uintptr_t addr = orig_addr;
 
@@ -700,6 +700,7 @@ void tlb_set_page(CPUState *cpu, target_ulong vaddr,
                   hwaddr paddr, int prot,
                   int mmu_idx, target_ulong size)
 {
+     tlb_debug("tlb_set_page called\n");
     tlb_set_page_with_attrs(cpu, vaddr, paddr, MEMTXATTRS_UNSPECIFIED,
                             prot, mmu_idx, size);
 }
