@@ -117,7 +117,7 @@ static void aarch64_a76_initfn(Object *obj)
     cpu->id_aa64isar1 = 0x0000000000100001ull;
     cpu->id_aa64mmfr0 = 0x0000000000101122ull;
     cpu->id_aa64mmfr1 = 0x0000000010212122ull;
-    cpu->id_aa64mmfr2 = 0x0000000000001011ull;
+    // cpu->id_aa64mmfr2 = 0x0000000000001011ull;
     cpu->id_aa64pfr0  = 0x1100000010111112ull; /* GIC filled in later */
     cpu->id_aa64pfr1  = 0x0000000000000010ull;
     cpu->id_afr0       = 0x00000000;
@@ -128,7 +128,7 @@ static void aarch64_a76_initfn(Object *obj)
     cpu->id_isar3 = 0x01112131;
     cpu->id_isar4 = 0x00010142;
     cpu->id_isar5 = 0x01011121;
-    cpu->id_isar6 = 0x00000010;
+    // cpu->id_isar6 = 0x00000010;
     cpu->id_mmfr0 = 0x10201105;
     cpu->id_mmfr1 = 0x40000000;
     cpu->id_mmfr2 = 0x01260000;
@@ -136,7 +136,7 @@ static void aarch64_a76_initfn(Object *obj)
     cpu->id_mmfr4 = 0x00021110;
     cpu->id_pfr0  = 0x10010131;
     cpu->id_pfr1  = 0x00010000; /* GIC filled in later */
-    cpu->id_pfr2  = 0x00000011;
+    // cpu->id_pfr2  = 0x00000011;
     cpu->midr = 0x414fd0b1;          /* r4p1 */
     cpu->revidr = 0;
 
@@ -154,9 +154,9 @@ static void aarch64_a76_initfn(Object *obj)
     cpu->gic_vprebits = 5;
 
     /* From B5.1 AdvSIMD AArch64 register summary */
-    cpu->isar.mvfr0 = 0x10110222;
-    cpu->isar.mvfr1 = 0x13211111;
-    cpu->isar.mvfr2 = 0x00000043;
+    cpu->mvfr0 = 0x10110222;
+    cpu->mvfr1 = 0x13211111;
+    cpu->mvfr2 = 0x00000043;
 }
 
 static void aarch64_a55_initfn(Object *obj)
@@ -182,7 +182,7 @@ static void aarch64_a55_initfn(Object *obj)
     cpu->id_aa64isar1 = 0x0000000000100001ull;
     cpu->id_aa64mmfr0 = 0x0000000000101122ull;
     cpu->id_aa64mmfr1 = 0x0000000010212122ull;
-    cpu->id_aa64mmfr2 = 0x0000000000001011ull;
+    // cpu->id_aa64mmfr2 = 0x0000000000001011ull;
     cpu->id_aa64pfr0  = 0x0000000010112222ull;
     cpu->id_aa64pfr1  = 0x0000000000000010ull;
     cpu->id_afr0       = 0x00000000;
@@ -193,7 +193,7 @@ static void aarch64_a55_initfn(Object *obj)
     cpu->id_isar3 = 0x01112131;
     cpu->id_isar4 = 0x00011142;
     cpu->id_isar5 = 0x01011121;
-    cpu->id_isar6 = 0x00000010;
+    // cpu->id_isar6 = 0x00000010;
     cpu->id_mmfr0 = 0x10201105;
     cpu->id_mmfr1 = 0x40000000;
     cpu->id_mmfr2 = 0x01260000;
@@ -201,7 +201,7 @@ static void aarch64_a55_initfn(Object *obj)
     cpu->id_mmfr4 = 0x00021110;
     cpu->id_pfr0  = 0x10010131;
     cpu->id_pfr1  = 0x00011011;
-    cpu->id_pfr2  = 0x00000011;
+    // cpu->id_pfr2  = 0x00000011;
     cpu->midr = 0x412FD050;          /* r2p0 */
     cpu->revidr = 0;
 
@@ -217,14 +217,14 @@ static void aarch64_a55_initfn(Object *obj)
     cpu->gic_num_lrs = 4;
     cpu->gic_vpribits = 5;
     cpu->gic_vprebits = 5;
-    cpu->gic_pribits = 5;
+    // cpu->gic_pribits = 5;
 
-    cpu->isar.mvfr0 = 0x10110222;
-    cpu->isar.mvfr1 = 0x13211111;
-    cpu->isar.mvfr2 = 0x00000043;
+    cpu->mvfr0 = 0x10110222;
+    cpu->mvfr1 = 0x13211111;
+    cpu->mvfr2 = 0x00000043;
 
     /* From D5.4 AArch64 PMU register summary */
-    cpu->isar.reset_pmcr_el0 = 0x410b3000;
+    cpu->reset_pmcr_el0 = 0x410b3000;
 }
 
 
