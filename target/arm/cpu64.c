@@ -224,7 +224,7 @@ static void aarch64_a55_initfn(Object *obj)
     cpu->mvfr2 = 0x00000043;
 
     /* From D5.4 AArch64 PMU register summary */
-    cpu->reset_pmcr_el0 = 0x410b3000;
+    // cpu->reset_pmcr_el0 = 0x410b3000;
 }
 
 
