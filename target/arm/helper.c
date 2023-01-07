@@ -15,6 +15,7 @@
 #include <zlib.h> /* For crc32 */
 #include "exec/semihost.h"
 #include "sysemu/kvm.h"
+#include <inttypes.h>
 
 #define ARM_CPU_FREQ 1000000000 /* FIXME: 1 GHz, should be configurable */
 
@@ -4485,6 +4486,9 @@ static void define_debug_regs(ARMCPU *cpu)
      * check that if they both exist then they agree.
      */
     if (arm_feature(&cpu->env, ARM_FEATURE_AARCH64)) {
+        printf("cpu %" PRIx64 "\n",cpu->id_aa64dfr0 );
+        printf("brps %" PRIx64 "\n", brps );
+
         assert(extract32(cpu->id_aa64dfr0, 12, 4) == brps);
         assert(extract32(cpu->id_aa64dfr0, 20, 4) == wrps);
         assert(extract32(cpu->id_aa64dfr0, 28, 4) == ctx_cmps);
