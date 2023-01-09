@@ -161,6 +161,7 @@ static void aarch64_a76_initfn(Object *obj)
 
 static void aarch64_a55_initfn(Object *obj)
 {
+
     ARMCPU *cpu = ARM_CPU(obj);
 
     cpu->dtb_compatible = "arm,cortex-a55";
@@ -225,6 +226,8 @@ static void aarch64_a55_initfn(Object *obj)
 
     /* From D5.4 AArch64 PMU register summary */
     // cpu->reset_pmcr_el0 = 0x410b3000;
+
+    cpu->dbgdidr = 0x35185000;
 }
 
 
