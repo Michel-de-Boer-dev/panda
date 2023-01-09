@@ -157,6 +157,8 @@ static void aarch64_a76_initfn(Object *obj)
     cpu->mvfr0 = 0x10110222;
     cpu->mvfr1 = 0x13211111;
     cpu->mvfr2 = 0x00000043;
+
+    cpu->dbgdidr = 0x35185000;
 }
 
 static void aarch64_a55_initfn(Object *obj)
