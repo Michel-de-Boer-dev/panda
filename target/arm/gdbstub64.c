@@ -26,6 +26,13 @@ int aarch64_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
     ARMCPU *cpu = ARM_CPU(cs);
     CPUARMState *env = &cpu->env;
 
+    if( !is_a64(env) )
+    {
+        printf("!is_a64 called");
+        // AArch32 mode uses the ARM registers, they are not always synced, thus handle them there.
+        return arm_cpu_gdb_read_register(cs, mem_buf, n);
+    }
+
     if (n < 31) {
         /* Core integer register.  */
         return gdb_get_reg64(mem_buf, env->xregs[n]);
@@ -47,6 +54,11 @@ int aarch64_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
     ARMCPU *cpu = ARM_CPU(cs);
     CPUARMState *env = &cpu->env;
     uint64_t tmp;
+    if( !is_a64(env) )
+    {
+        // AArch32 mode uses the ARM registers, they are not alwys synced, thus handle them there.
+        return arm_cpu_gdb_write_register(cs, mem_buf, n);
+    }
 
     tmp = ldq_p(mem_buf);
 
