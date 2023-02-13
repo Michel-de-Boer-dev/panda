@@ -28,9 +28,7 @@ int aarch64_cpu_gdb_read_register(CPUState *cs, uint8_t *mem_buf, int n)
 
     if( !is_a64(env) )
     {
-        printf("!is_a64 called");
-        // AArch32 mode uses the ARM registers, they are not always synced, thus handle them there.
-        return arm_cpu_gdb_read_register(cs, mem_buf, n);
+        aarch64_sync_32_to_64(env);
     }
 
     if (n < 31) {
